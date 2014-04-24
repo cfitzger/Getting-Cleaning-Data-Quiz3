@@ -107,3 +107,21 @@ Your Answer		Score	Explanation
 32.96667, 91.91304	Correct	3.00	
 23, 30
 ```{r}
+mergedData = merge(edDf2,GDPDf3,by.x="CountryCode",by.y="CountryCode",all=TRUE)
+mergedData2<-na.omit(mergedData)
+
+mean(mergedData2[which(mergedData2[,2]=="High income: nonOECD"),3])
+mean(mergedData2[which(mergedData2[,2]=="High income: OECD"),3])
+```
+Question 5
+Cut the GDP ranking into 5 separate quantile groups. Make a table versus Income.Group. How many countries are Lower middle income but among the 38 nations with highest GDP?
+Your Answer		Score	Explanation
+5	Correct	3.00	
+18			
+0			
+13
+```{r}
+library(Hmisc)
+mergedData2$quants=cut2(mergedData2$GDPRank,g=5)
+table(mergedData2$Income.Group,mergedData2$quants)
+```
